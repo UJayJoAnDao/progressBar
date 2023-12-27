@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橫向進度條示例</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #progress-container {
+            width: 80%;
+            height: 80%;
+            /* height: max-content; */
+            position: relative;
+            border: 1px solid blue;
+        }
+
+        #progress-bar {
+            height: 30px;
+            width: 100%;
+            background-color: #4CAF50;
+            /* 設置進度條的顏色 */
+            position: absolute;
+            bottom: 0;
+            animation: wave 2s ease-in-out infinite;
+            /* 添加波浪動畫 */
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+                /* 設置波動的幅度 */
+            }
+        }
+
+        #progress-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 50px;
+            font-family: 'Arial', sans-serif;
+            /* 設置字體 */
+            font-weight: bold;
+            /* 可根據需要設置字體粗細 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+        <div id="progress-value">0%</div>
+        <div>按鈕一</div>
+        <div>按鈕二</div>
+        <div>按鈕三</div>
+    </div>
+
+    <script>
+        // 在這裡設定進度條的變數，範圍在0到100之間
+        var progressVariable = 50;
+
+        // 獲取進度條元素和文本元素
+        var progressBar = document.getElementById('progress-bar');
+        var progressValue = document.getElementById('progress-value');
+
+        // 更新進度條和百分比文本
+        function updateProgressBar() {
+            progressBar.style.width = progressVariable + '%';
+            progressValue.innerHTML = progressVariable;
+        }
+
+        // 初始化進度條
+        updateProgressBar();
+
+    </script>
+
+</body>
+
+</html>
