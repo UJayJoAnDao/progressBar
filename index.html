@@ -126,20 +126,21 @@
 
         // 更新進度條和百分比文本
         function updateProgressBar() {
+            let add = 0;
+            let begin_t = new Date('2023-12-27'.replace(/-/g, '/'));
+            let end_t = new Date('2024-1-9'.replace(/-/g, '/'));
+
+            let all_t = end_t.getTime() - begin_t.getTime();
+            let now_t = new Date();
+
+            let diff = now_t.getTime() - begin_t.getTime();
+            let percent = diff / all_t;
+            progressVariable = Math.round(percent * 10000) / 100 + add;
             progressBar.style.width = progressVariable + '%';
             progressValue.innerHTML = progressVariable + '%';
         }
 
-        let add = 0;
-        let begin_t = new Date('2023-12-27');
-        let end_t = new Date('2024-1-9');
 
-        let all_t = end_t.getTime() - begin_t.getTime();
-        let now_t = new Date();
-
-        let diff = now_t.getTime() - begin_t.getTime();
-        let percent = diff / all_t
-        progressVariable = Math.round(percent * 10000) / 100 + add;
         function addV(value) {
             add += value;
         }
