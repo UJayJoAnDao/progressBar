@@ -113,37 +113,43 @@
         var btn2 = document.getElementById('normal');
         var btn3 = document.getElementById('bad');
         btn1.addEventListener('click', () => {
-            addV(0.001);
-            progressVariable = Math.round(percent * 10000) / 100 + add;
-            updateProgressBar();
+            alert("你很棒!!恭喜小羊寶");
         });
+        btn2.addEventListener('click', () => {
+            alert("羊寶果然可以的!!!!🥳");
+        });
+        btn3.addEventListener('click', () => {
+            alert("辛苦羊寶了，吃點東西休息一下吧，你已經" + progressVariable + "啪了餒><");
+        });
+        var progress_list = [0, 7, 15, 25, 35, 50, 55, 63, 70, 75, 85, 90, 95, 100, 100];
+        var date_list = [27, 28, 29, 30, 31, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         // 在這裡設定進度條的變數，範圍在0到100之間
-        var progressVariable = 0;
+        var progressVariable = new Date().getDate();
 
+        // 每一天的進度基礎
+        progressBase = progress_list[date_list.indexOf(progressVariable)];
+        progressNextDay = progress_list[date_list.indexOf(progressVariable) + 1];
+        // alert(progressBase);
         // 獲取進度條元素和文本元素
         var progressBar = document.getElementById('progress-bar');
         var progressValue = document.getElementById('progress-value');
-
+        var today = new Date();
+        today = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
         // 更新進度條和百分比文本
         function updateProgressBar() {
-            let add = 0;
-            let begin_t = new Date('2023-12-27'.replace(/-/g, '/'));
-            let end_t = new Date('2024-1-9'.replace(/-/g, '/'));
-
-            let all_t = end_t.getTime() - begin_t.getTime();
+            let begin_t = new Date(today.replace(/-/g, '/'));
             let now_t = new Date();
+            let one_t = new Date('2023-12-31'.replace(/-/g, '/')).getTime() - new Date('2023-12-30'.replace(/-/g, '/')).getTime();
 
             let diff = now_t.getTime() - begin_t.getTime();
-            let percent = diff / all_t;
-            progressVariable = Math.round(percent * 10000) / 100 + add;
+            let percent = diff / one_t;
+            progressVariable = progressBase + Math.round(percent * (progressNextDay - progressBase) * 100) / 100;
             progressBar.style.width = progressVariable + '%';
             progressValue.innerHTML = progressVariable + '%';
         }
 
 
-        function addV(value) {
-            add += value;
-        }
+
         // 初始化進度條
         updateProgressBar();
         setInterval(updateProgressBar, 1000);
